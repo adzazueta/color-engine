@@ -19,8 +19,9 @@ behind the approved package boundary.
 
     pnpm add @adzazueta/color-engine
 
-The package is ESM-only and supports Node.js ^20.19.0 or >=22.12.0. The same
-runtime-independent build is intended for browser and Node.js consumers.
+The package is ESM-only and supports Node.js >=22.12.0. Node.js 20 is not a
+supported runtime. The same runtime-independent build is intended for browser
+and Node.js consumers.
 
 ## Initial public entrypoints
 
@@ -69,9 +70,8 @@ boundary for the supported extractor contract; the core never requires it.
     pnpm build
     pnpm test:smoke
 
-Repository tooling and CI conventions are defined directly in this repository.
-See TOOLING-DECISIONS.md and CONTRIBUTING.md for development and release
-expectations.
+Repository tooling and CI conventions are documented in the project's Linear
+documentation. See CONTRIBUTING.md for development and release expectations.
 
 ## License
 
