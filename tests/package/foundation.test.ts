@@ -25,7 +25,7 @@ describe('package foundation', () => {
         expect(packageJson.name).toBe('@adzazueta/color-engine');
         expect(packageJson.type).toBe('module');
         expect(packageJson.packageManager).toBe('pnpm@10.7.0');
-        expect(packageJson.engines.node).toBe('^20.19.0 || >=22.12.0');
+        expect(packageJson.engines.node).toBe('>=22.12.0');
         expect(packageJson.algorithmVersion).toBe('1');
         expect(packageJson.files).toContain('src');
         expect(packageJson.sideEffects).toBe(false);
