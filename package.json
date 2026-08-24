@@ -1,0 +1,101 @@
+{
+    "name": "@adzazueta/color-engine",
+    "version": "0.1.0",
+    "algorithmVersion": "1",
+    "description": "Standalone deterministic color intelligence for tonal palettes, semantic schemes, and accessible color systems",
+    "type": "module",
+    "keywords": [
+        "color",
+        "color-system",
+        "palette",
+        "accessibility",
+        "oklab",
+        "oklch",
+        "typescript",
+        "esm"
+    ],
+    "author": "Alexis D. Zazueta <alexisd.zazueta@gmail.com>",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/adzazueta/color-engine.git"
+    },
+    "bugs": {
+        "url": "https://github.com/adzazueta/color-engine/issues"
+    },
+    "homepage": "https://github.com/adzazueta/color-engine#readme",
+    "engines": {
+        "node": "^20.19.0 || >=22.12.0"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "packageManager": "pnpm@10.7.0",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js",
+            "default": "./dist/index.js"
+        },
+        "./adapters/color-extractor": {
+            "types": "./dist/adapters/color-extractor.d.ts",
+            "import": "./dist/adapters/color-extractor.js",
+            "default": "./dist/adapters/color-extractor.js"
+        }
+    },
+    "files": [
+        "dist",
+        "src",
+        "README.md",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "CHANGELOG.md",
+        "SECURITY.md"
+    ],
+    "sideEffects": false,
+    "scripts": {
+        "build": "pnpm sync-version && tsdown",
+        "changeset": "changeset",
+        "check-version": "node scripts/check-version.mjs",
+        "lint": "biome check .",
+        "lint:fix": "biome check --write .",
+        "release": "changeset publish",
+        "release:check": "pnpm check-version && pnpm lint && pnpm typecheck && pnpm build && pnpm test && pnpm test:smoke && pnpm test:pack && pnpm verify-exports",
+        "release:prepare": "pnpm changeset version && pnpm sync-version",
+        "sync-version": "node scripts/sync-version.mjs",
+        "test": "vitest run",
+        "test:ci": "pnpm run build && pnpm test",
+        "test:pack": "node scripts/verify-packed.mjs",
+        "test:smoke": "node scripts/smoke.mjs",
+        "test:watch": "vitest",
+        "typecheck": "tsc --noEmit",
+        "verify-exports": "node scripts/verify-exports.mjs",
+        "verify-published": "node scripts/verify-published.mjs",
+        "prepublishOnly": "pnpm release:check",
+        "prepare": "node -e \"try{require('child_process').execFileSync('simple-git-hooks',{stdio:'pipe'})}catch(e){}\""
+    },
+    "simple-git-hooks": {
+        "pre-commit": "pnpm lint-staged && pnpm typecheck"
+    },
+    "lint-staged": {
+        "*.{js,ts,cjs,mjs}": [
+            "biome check --write --no-errors-on-unmatched",
+            "vitest related --run --passWithNoTests"
+        ]
+    },
+    "onlyBuiltDependencies": [
+        "esbuild"
+    ],
+    "devDependencies": {
+        "@biomejs/biome": "^2.5.4",
+        "@changesets/cli": "^2.31.1",
+        "@types/node": "^26.1.0",
+        "lint-staged": "^17.0.8",
+        "publint": "^0.3.21",
+        "simple-git-hooks": "^2.13.1",
+        "tsdown": "^0.22.0",
+        "typescript": "^6.0.0",
+        "unrun": "^0.3.1",
+        "vitest": "^4.1.0"
+    }
+}
